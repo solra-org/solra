@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/fisa4th-final-project/solra-backend.git'
     targetRevision: HEAD
-    path: overlays/dev
+    path: deploy/overlays/dev
   project: default
   syncPolicy:
     automated:
