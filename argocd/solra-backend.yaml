@@ -6,7 +6,6 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: 'solra-dev'
     namespace: solra
     server: 'https://kubernetes.default.svc'
   source:
