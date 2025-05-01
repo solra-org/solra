@@ -1,0 +1,40 @@
+- name: Reset Kubernetes and clean up all nodes
+  hosts: all
+  become: yes
+  tasks:
+    - name: Reset kubeadm (if previously initialized)
+      command: kubeadm reset -f
+      ignore_errors: true
+
+    - name: Remove Kubernetes directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/kubernetes
+        - /var/lib/etcd
+        - /var/lib/kubelet
+        - /var/lib/cni
+        - /etc/cni
+        - /opt/cni
+        - /run/flannel
+        - /run/cni
+        - /home/ubuntu/.kube
+
+    - name: Clean containerd data (optional but ensures fresh state)
+      file:
+        path: /var/lib/containerd
+        state: absent
+
+    - name: Restart containerd
+      systemd:
+        name: containerd
+        state: restarted
+        enabled: true
+
+    - name: Restart kubelet
+      systemd:
+        name: kubelet
+        state: restarted
+        enabled: true
+

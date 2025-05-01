@@ -1,0 +1,22 @@
+- name: Join worker nodes
+  hosts: worker
+  become: yes
+  vars:
+    master_host: "{{ groups['master'][0] }}"
+
+  tasks:
+    - name: Get join script from master
+      slurp:
+        src: /tmp/kubeadm-join.sh
+      delegate_to: "{{ master_host }}"
+      register: join_script
+
+    - name: Copy join script to workers
+      copy:
+        dest: /tmp/kubeadm-join.sh
+        content: "{{ join_script.content | b64decode }}"
+        mode: '0755'
+
+    - name: Run join command
+      command: bash /tmp/kubeadm-join.sh --ignore-preflight-errors=all
+
