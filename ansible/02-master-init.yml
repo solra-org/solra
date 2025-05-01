@@ -1,0 +1,76 @@
+- name: Initialize Kubernetes control-plane
+  hosts: master
+  become: yes
+  vars:
+    pod_network_cidr: "10.0.0.0/16"
+    advertise_address: "{{ hostvars[inventory_hostname]['internal_ip'] }}"
+
+  tasks:
+    - name: Clean up etcd data
+      file:
+        path: /var/lib/etcd
+        state: absent
+
+    - name: Recreate etcd directory
+      file:
+        path: /var/lib/etcd
+        state: directory
+        mode: '0700'
+
+    - name: Rewrite containerd config with systemd cgroup
+      shell: containerd config default | sed 's/SystemdCgroup = false/SystemdCgroup = true/' > /etc/containerd/config.toml
+
+    - name: Restart containerd and kubelet
+      service:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - containerd
+        - kubelet
+
+    - name: Pre-pull required images
+      command: kubeadm config images pull
+
+    - name: kubeadm init
+      command: >
+        kubeadm init
+        --cri-socket=unix:///run/containerd/containerd.sock
+        --apiserver-advertise-address={{ advertise_address }}
+        --pod-network-cidr={{ pod_network_cidr }}
+      args:
+        creates: /etc/kubernetes/admin.conf
+
+    - name: Wait for API server
+      wait_for:
+        host: "{{ advertise_address }}"
+        port: 6443
+        timeout: 300
+        delay: 10
+
+    - name: Generate kubeadm join script
+      shell: kubeadm token create --print-join-command > /tmp/kubeadm-join.sh
+      args:
+        creates: /tmp/kubeadm-join.sh
+
+    - name: Make join script executable
+      file:
+        path: /tmp/kubeadm-join.sh
+        mode: '0755'
+
+    - name: Create kube config dir for ansible user
+      file:
+        path: /home/{{ ansible_user }}/.kube
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0700'
+
+    - name: Copy kubeconfig to user
+      copy:
+        remote_src: yes
+        src: /etc/kubernetes/admin.conf
+        dest: /home/{{ ansible_user }}/.kube/config
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0600'
+

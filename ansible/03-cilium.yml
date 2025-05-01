@@ -1,0 +1,92 @@
+# playbooks/04-cilium.yml
+- name: Install Cilium CNI on control-plane
+  hosts: master
+  become: yes
+  vars:
+    cilium_version: "1.15.5"
+    kubeconfig: "/etc/kubernetes/admin.conf"
+    k8s_api_host: "10.0.2.100"
+    k8s_api_port: "6443"
+
+  tasks:
+    # ── 1. Helm 설치 및 저장소 등록 ──
+    - name: Ensure apt prerequisites for Helm
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+        update_cache: yes
+
+    - name: Add Helm GPG key
+      ansible.builtin.apt_key:
+        url: https://baltocdn.com/helm/signing.asc
+        state: present
+
+    - name: Add Helm APT repository
+      ansible.builtin.apt_repository:
+        repo: "deb https://baltocdn.com/helm/stable/debian/ all main"
+        filename: helm
+        state: present
+
+    - name: Update apt cache after adding Helm repo
+      apt:
+        update_cache: yes
+
+    - name: Install Helm CLI
+      apt:
+        name: helm
+        state: present
+
+    # ── 2. Helm 저장소 등록 및 업데이트 ──
+    - name: Add Cilium Helm repository
+      command: helm repo add cilium https://helm.cilium.io/
+      args:
+        creates: "/root/.cache/helm/repository/cilium-index.yaml"
+      environment:
+        HOME: "/root"
+
+    - name: Update Helm repositories
+      command: helm repo update
+      environment:
+        HOME: "/root"
+
+    # ── 3. 네임스페이스 존재 확인 ──
+    - name: Ensure cilium namespace exists
+      shell: |
+        cat <<EOF | kubectl apply -f -
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: cilium
+        EOF
+      args:
+        executable: /bin/bash
+      environment:
+        KUBECONFIG: "{{ kubeconfig }}"
+
+    # ── 4. Cilium 설치 (Helm) ──
+    - name: Install Cilium via Helm
+      command: >
+        helm upgrade --install cilium cilium/cilium
+          --version {{ cilium_version }}
+          --namespace cilium
+          --create-namespace
+          --set kubeProxyReplacement=disabled
+          --set k8sServiceHost={{ k8s_api_host }}
+          --set k8sServicePort={{ k8s_api_port }}
+          --set operator.replicas=1
+          --kubeconfig {{ kubeconfig }}
+      environment:
+        HOME: "/root"
+
+    # ── 5. Cilium Pod 상태 확인 ──
+    - name: Wait for all Cilium pods to be ready
+      command: >
+        kubectl wait --for=condition=Ready pods --all
+        -n cilium --timeout=120s --kubeconfig={{ kubeconfig }}
+      environment:
+        KUBECONFIG: "{{ kubeconfig }}"
+
