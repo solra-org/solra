@@ -322,3 +322,6 @@ crash.log
 # Terraform working directory
 .terraform/
 .terraform.lock.hcl
+
+# k8s secret resource
+solra-backend-secret.yaml
