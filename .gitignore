@@ -325,3 +325,5 @@ crash.log
 
 # k8s secret resource
 solra-backend-secret.yaml
+solra-root.ca.crt
+solra-root.token.txt
