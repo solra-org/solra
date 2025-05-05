@@ -3,7 +3,9 @@ kind: ServiceAccount
 metadata:
   name: solra-root
   namespace: solra
+
 ---
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -16,3 +18,14 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
+  
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: solra-root-token
+  namespace: solra
+  annotations:
+    kubernetes.io/service-account.name: solra-root
+type: kubernetes.io/service-account-token
