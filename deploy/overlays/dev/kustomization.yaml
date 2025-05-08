@@ -5,8 +5,8 @@ namespace: solra
 resources:
   - ../../base
 
-patchesStrategicMerge:
-  - patch.yaml
+# patchesStrategicMerge:
+#   - patch.yaml
 
 commonAnnotations:
   sync-tag: "dev-placeholder"
