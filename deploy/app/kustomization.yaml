@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: solra
+namespace: argocd
 resources:
-  - solra-ingress.yaml
-  - solra-root-user.yaml
+  - solra-backend-app.yaml
+  - solra-frontend-app.yaml
