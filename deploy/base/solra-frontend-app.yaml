@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-solra-backend
+  name: solra-frontend-app
   namespace: argocd
 spec:
   destination:
     namespace: solra
     server: 'https://kubernetes.default.svc'
   source:
-    repoURL: 'https://github.com/fisa4th-final-project/solra-backend.git'
+    repoURL: 'https://github.com/fisa4th-final-project/solra-frontend.git'
     targetRevision: dev
     path: deploy/overlays/dev
   project: default

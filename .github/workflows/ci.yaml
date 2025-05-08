@@ -1,0 +1,32 @@
+name: CI/CD for solra
+
+on:
+  push:
+    branches: [dev, main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Update kustomization.yaml sync-tag
+        run: |
+          BRANCH=${GITHUB_REF##*/}
+          if [ "$BRANCH" = "dev" ]; then
+            OVERLAY_PATH=deploy/overlays/dev/kustomization.yaml
+          elif [ "$BRANCH" = "main" ]; then
+            OVERLAY_PATH=deploy/overlays/prod/kustomization.yaml
+          else
+            echo "No overlay for branch $BRANCH"; exit 0
+          fi
+
+          sed -i "s|sync-tag:.*|sync-tag: \"${GITHUB_SHA}\"|" "$OVERLAY_PATH"
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add "$OVERLAY_PATH"
+          git commit -m "deploy: sync-tag > $BRANCH: ${{ github.sha }}"
+          git push
