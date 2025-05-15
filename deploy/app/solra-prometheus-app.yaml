@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: solra-prometheus-dev-prod
+  name: solra-prometheus-app
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/fisa4th-final-project/solra-infra.git
+    repoURL: 'https://github.com/fisa4th-final-project/solra-infra.git'
     targetRevision: dev
     path: monitoring/overlays/dev
     directory:
@@ -24,18 +24,18 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: solra-prometheus-dev-prod
+  name: solra-prometheus-app-prod
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/fisa4th-final-project/solra-infra.git
+    repoURL: 'https://github.com/fisa4th-final-project/solra-infra.git'
     targetRevision: main
     path: monitoring/overlays/prod
     directory:
       recurse: true
   destination:
-    server: https://192.168.1.254:6443
+    server: 'https://192.168.1.254:6443'
     namespace: solra
   syncPolicy:
     automated:
