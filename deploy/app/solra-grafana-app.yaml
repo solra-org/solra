@@ -11,7 +11,7 @@ spec:
     path: grafana/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: solra
   syncPolicy:
     automated:
       prune: true
