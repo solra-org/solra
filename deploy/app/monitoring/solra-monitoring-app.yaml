@@ -1,18 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: solra-monitoring-app
+  name: solra-monitoring
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://prometheus-community.github.io/helm-charts'
-    chart: kube-prometheus-stack
-    targetRevision: 56.6.2
+    repoURL: 'https://github.com/fisa4th-final-project/solra.git'
+    targetRevision: dev
+    path: deploy/app/monitoring
     helm:
       valueFiles:
         - values.yaml
-    path: deploy/app/monitoring  # values.yaml 파일이 있는 Git repo 내부 경로
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: solra-monitoring
@@ -20,3 +19,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
