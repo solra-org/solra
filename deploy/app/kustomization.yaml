@@ -6,5 +6,3 @@ resources:
   - solra-backend-app.yaml
   - solra-frontend-app.yaml
   - solra-redis-app.yaml
-  - solra-prometheus-app.yaml
-  - solra-grafana-app.yaml
