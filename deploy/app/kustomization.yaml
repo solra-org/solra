@@ -6,3 +6,4 @@ resources:
   - solra-backend-app.yaml
   - solra-frontend-app.yaml
   - solra-redis-app.yaml
+  - solra-monitoring-app.yaml
