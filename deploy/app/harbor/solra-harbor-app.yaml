@@ -10,8 +10,9 @@ spec:
     chart: harbor
     targetRevision: 1.14.0
     helm:
-      valueFiles:
-        - values.yaml
+      parameters:
+        - name: expose.ingress.hosts.core
+          value: solra.harbor.com
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-harbor
