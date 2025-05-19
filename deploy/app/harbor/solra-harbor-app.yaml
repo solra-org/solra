@@ -16,7 +16,7 @@ spec:
         - name: expose.ingress.className
           value: nginx
         - name: expose.ingress.annotations."nginx\.ingress\.kubernetes\.io/ssl-redirect"
-          value: "false"
+          value: "\"false\""
         - name: expose.tls.enabled
           value: "false"
   destination:
