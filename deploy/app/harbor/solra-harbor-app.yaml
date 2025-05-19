@@ -13,6 +13,8 @@ spec:
       parameters:
         - name: expose.ingress.hosts.core
           value: solra.harbor.com
+        - name: expose.ingress.controller
+          value: nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-harbor
