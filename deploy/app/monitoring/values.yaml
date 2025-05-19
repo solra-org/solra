@@ -10,6 +10,8 @@ prometheus:
     type: NodePort
     nodePort: 32001
   prometheusSpec:
+    scrapeInterval: 30s
+    evaluationInterval: 30s
     serviceMonitorSelectorNilUsesHelmValues: false
     resources:
       requests:
