@@ -10,8 +10,13 @@ spec:
     chart: ingress-nginx
     targetRevision: 4.10.0
     helm:
-      valueFiles:
-        - values.yaml
+      parameters:
+        - name: controller.service.type
+          value: NodePort
+        - name: controller.service.nodePorts.http
+          value: "30002"
+        - name: controller.service.nodePorts.https
+          value: "30443"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: ingress-nginx
