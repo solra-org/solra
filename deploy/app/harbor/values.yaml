@@ -32,3 +32,6 @@ persistence:
     trivy:
       size: 5Gi
       storageClass: local-path
+      
+trivy:
+  enabled: true
