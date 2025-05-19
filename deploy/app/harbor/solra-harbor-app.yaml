@@ -15,6 +15,10 @@ spec:
           value: solra.harbor.com
         - name: expose.ingress.className
           value: nginx
+        - name: expose.ingress.annotations."nginx\.ingress\.kubernetes\.io/ssl-redirect"
+          value: "false"
+        - name: expose.tls.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-harbor
