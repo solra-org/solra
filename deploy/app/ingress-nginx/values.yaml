@@ -1,0 +1,7 @@
+controller:
+  replicaCount: 1
+  service:
+    type: NodePort
+    nodePorts:
+      http: 30002
+      https: 30443

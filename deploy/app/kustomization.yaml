@@ -7,3 +7,4 @@ resources:
   - solra-frontend-app.yaml
   - solra-redis-app.yaml
   - monitoring/solra-monitoring-app.yaml
+  - ingress-nginx/ingress-ngnix-app.yaml
