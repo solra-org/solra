@@ -1,0 +1,35 @@
+expose:
+  type: ingress
+  tls:
+    enabled: false
+  ingress:
+    hosts:
+      core: solra.harbor.com
+    controller: default
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+
+harborAdminPassword: Harbor12345
+
+persistence:
+  enabled: true
+  persistentVolumeClaim:
+    registry:
+      size: 5Gi
+      storageClass: local-path
+    chartmuseum:
+      size: 2Gi
+      storageClass: local-path
+    jobservice:
+      size: 1Gi
+      storageClass: local-path
+    database:
+      size: 2Gi
+      storageClass: local-path
+    redis:
+      size: 1Gi
+      storageClass: local-path
+    trivy:
+      size: 5Gi
+      storageClass: local-path
