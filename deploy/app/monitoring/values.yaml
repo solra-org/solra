@@ -22,7 +22,7 @@ prometheus:
           resources:
             requests:
               storage: 10Gi
-          storageClassName: ""
+          storageClassName: local-path
 
 
 prometheus-node-exporter:
