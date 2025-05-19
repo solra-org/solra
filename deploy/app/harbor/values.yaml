@@ -3,12 +3,11 @@ expose:
   tls:
     enabled: false
   ingress:
+    className: nginx
     hosts:
       core: solra.harbor.com
-    controller: default
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 
 harborAdminPassword: Harbor12345
 
