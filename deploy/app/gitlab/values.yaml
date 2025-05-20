@@ -1375,6 +1375,9 @@ gitlab:
       type: NodePort
       nodePort: 30004
       externalPort: 30004
+    ingress:
+      enabled: false
+      tls: {}
   ## https://docs.gitlab.com/charts/charts/gitlab/toolbox
   toolbox:
     replicas: 1
