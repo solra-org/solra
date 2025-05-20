@@ -31,8 +31,6 @@ renderHelmLabels: true
 
 controller:
   # -- Used for label app.kubernetes.io/component
-  adminUser: admin
-  adminPassword: admin123
   componentName: "jenkins-controller"
   image:
     # -- Controller image registry
@@ -79,7 +77,7 @@ controller:
     username: "admin"
     # -- Admin password created as a secret if `controller.admin.createSecret` is true
     # @default -- <random password>
-    password:
+    password: "admin123"
 
     # -- The key in the existing admin secret containing the username
     userKey: jenkins-admin-user
