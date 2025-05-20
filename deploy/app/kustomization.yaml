@@ -9,3 +9,4 @@ resources:
   - monitoring/solra-monitoring-app.yaml
   - harbor/solra-harbor-app.yaml
   - ingress-nginx/ingress-nginx-app.yaml
+  - jenkins/solra-jenkins-app.yaml
