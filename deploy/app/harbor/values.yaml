@@ -32,9 +32,13 @@ persistence:
     trivy:
       size: 5Gi
       storageClass: local-path
-
+      
 trivy:
   enabled: true
+  image:
+    repository: goharbor/trivy-adapter-photon
+    tag: v2.9.0
+    pullPolicy: IfNotPresent
   
 internalTLS:
   enabled: false
