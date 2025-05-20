@@ -31,6 +31,7 @@ renderHelmLabels: true
 
 controller:
   # -- Used for label app.kubernetes.io/component
+
   componentName: "jenkins-controller"
   image:
     # -- Controller image registry
@@ -74,10 +75,10 @@ controller:
   # you should revert controller.admin.username to your preferred admin user:
   admin:
     # -- Admin username created as a secret if `controller.admin.createSecret` is true
-    # username: "admin"
+    username: "admin"
     # -- Admin password created as a secret if `controller.admin.createSecret` is true
     # @default -- <random password>
-    # password: "admin123"
+    password: "admin123"
 
     # -- The key in the existing admin secret containing the username
     userKey: jenkins-admin-user
@@ -87,10 +88,10 @@ controller:
     # The default configuration uses this secret to configure an admin user
     # If you don't need that user or use a different security realm, then you can disable it
     # -- Create secret for admin user
-    createSecret: false
+    createSecret: true
 
     # -- The name of an existing secret containing the admin credentials
-    existingSecret: jenkins-admin-secret
+    existingSecret: ""
   # -- Email address for the administrator of the Jenkins instance
   jenkinsAdminEmail:
 
