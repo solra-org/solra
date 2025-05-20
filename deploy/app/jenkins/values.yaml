@@ -31,6 +31,8 @@ renderHelmLabels: true
 
 controller:
   # -- Used for label app.kubernetes.io/component
+  adminUser: admin
+  adminPassword: admin123
   componentName: "jenkins-controller"
   image:
     # -- Controller image registry
