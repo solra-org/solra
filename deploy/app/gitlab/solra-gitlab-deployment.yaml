@@ -26,6 +26,7 @@ spec:
                 nginx['listen_port'] = 8080
                 nginx['listen_https'] = false
                 nginx['redirect_http_to_https'] = false
+                puma['listen'] = 'unix:///var/opt/gitlab/gitlab-rails/sockets/gitlab.socket'
           volumeMounts:
             - mountPath: /etc/gitlab
               name: gitlab-config
