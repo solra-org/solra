@@ -60,7 +60,7 @@ global:
     allowClusterRoles: true
   ## https://docs.gitlab.com/charts/charts/globals#configure-host-settings
   hosts:
-    domain: ""
+    domain: example.com
     hostSuffix:
     https: true
     externalIP:
@@ -76,12 +76,12 @@ global:
   ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
   ingress:
     apiVersion: ""
-    configureCertmanager: false
+    configureCertmanager: true
     useNewIngressForCerts: false
     provider: nginx
     # class:
     annotations: {}
-    enabled: false
+    enabled: true
     tls: {}
     #   enabled: true
     #   secretName:
@@ -970,7 +970,7 @@ certmanager:
 ## https://docs.gitlab.com/charts/architecture/decisions#nginx-ingress
 ## Installation & configuration of charts/ingress-nginx:
 nginx-ingress: &nginx-ingress
-  enabled: false
+  enabled: true
   tcpExternalConfig: "true"
   controller: &nginx-ingress-controller
     addHeaders:
@@ -1329,7 +1329,7 @@ shared-secrets:
 ## Installation & configuration of gitlab/gitlab-runner
 ## See requirements.yaml for current version
 gitlab-runner:
-  install: false
+  install: true
   rbac:
     create: true
   runners:
@@ -1370,14 +1370,6 @@ traefik:
 ## Settings for individual sub-charts under GitLab
 ## Note: Many of these settings are configurable via globals
 gitlab:
-  webservice:
-    service:
-      type: NodePort
-      nodePort: 30004
-      externalPort: 30004
-    ingress:
-      enabled: false
-      tls: {}
   ## https://docs.gitlab.com/charts/charts/gitlab/toolbox
   toolbox:
     replicas: 1
@@ -1404,11 +1396,6 @@ gitlab:
   #   kas:
   ## https://docs.gitlab.com/charts/charts/gitlab/praefect
   #   praefect:
-
-registry:
-  ingress:
-    enabled: false
-    tls: {}
 
 ## Installation & configuration of gitlab/gitlab-zoekt
 gitlab-zoekt:
