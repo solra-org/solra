@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: solra-gitlab-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/your-repo
+    targetRevision: dev
+    path: deploy/app/gitlab
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: solra-gitlab
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
