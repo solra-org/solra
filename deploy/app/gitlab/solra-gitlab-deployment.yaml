@@ -22,7 +22,7 @@ spec:
           env:
             - name: GITLAB_OMNIBUS_CONFIG
               value: |
-                external_url 'http://10.5.100.21:30004'
+                external_url 'http://localhost:8080'
                 nginx['listen_port'] = 8080
                 nginx['listen_https'] = false
                 nginx['redirect_http_to_https'] = false
@@ -58,10 +58,6 @@ spec:
       port: 8080
       targetPort: 8080
       nodePort: 30004
-    - name: https
-      port: 443
-      targetPort: 8443
-      nodePort: 31004
     - name: ssh
       port: 22
       targetPort: 22
