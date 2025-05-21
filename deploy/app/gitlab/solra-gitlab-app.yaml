@@ -12,6 +12,15 @@ spec:
     helm:
       valueFiles:
         - values.yaml
+      parameters:
+        - name: certmanager-issuer.email
+          value: ""
+        - name: certmanager-issuer.install
+          value: "false"
+        - name: installCertmanager
+          value: "false"
+        - name: certmanager.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-gitlab
