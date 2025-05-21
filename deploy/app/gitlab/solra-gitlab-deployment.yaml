@@ -16,13 +16,16 @@ spec:
         - name: gitlab
           image: gitlab/gitlab-ce:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8080
             - containerPort: 443
             - containerPort: 22
           env:
             - name: GITLAB_OMNIBUS_CONFIG
               value: |
                 external_url 'http://10.5.100.21:30004'
+                nginx['listen_port'] = 8080
+                nginx['listen_https'] = false
+                nginx['redirect_http_to_https'] = false
           volumeMounts:
             - mountPath: /etc/gitlab
               name: gitlab-config
@@ -55,7 +58,7 @@ spec:
   type: NodePort
   ports:
     - name: http
-      port: 80
+      port: 8080
       targetPort: 8080
       nodePort: 30004
     - name: https
