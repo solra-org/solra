@@ -35,17 +35,14 @@ spec:
               name: gitlab-data
       volumes:
         - name: gitlab-config
-          hostPath:
-            path: /mnt/gitlab/config
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: gitlab-config
         - name: gitlab-logs
-          hostPath:
-            path: /mnt/gitlab/logs
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: gitlab-logs
         - name: gitlab-data
-          hostPath:
-            path: /mnt/gitlab/data
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: gitlab-data
 
 ---
 apiVersion: v1
