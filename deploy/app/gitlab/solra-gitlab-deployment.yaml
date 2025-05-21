@@ -22,7 +22,7 @@ spec:
           env:
             - name: GITLAB_OMNIBUS_CONFIG
               value: |
-                external_url '<<주소>>'
+                external_url 'http://10.5.100.21:30004'
           volumeMounts:
             - mountPath: /etc/gitlab
               name: gitlab-config
