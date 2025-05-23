@@ -31,7 +31,7 @@ renderHelmLabels: true
 
 controller:
   # -- Used for label app.kubernetes.io/component
-
+  serviceType: ClusterIP
   componentName: "jenkins-controller"
   image:
     # -- Controller image registry
@@ -217,7 +217,7 @@ controller:
   # For minikube, set this to NodePort, elsewhere uses LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
   # -- k8s service type
-  serviceType: ClusterIP
+  # serviceType: ClusterIP
 
   # -- k8s service clusterIP. Only used if serviceType is ClusterIP
   clusterIp:
