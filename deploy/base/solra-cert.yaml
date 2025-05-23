@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: solra-selfsigned-issuer
+spec:
+  selfSigned: {}
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: solra-cert
+  namespace: solra-cert
+spec:
+  secretName: keycloak-tls
+  duration: 8760h # 1y
+  renewBefore: 720h # 30d
+  issuerRef:
+    name: solra-selfsigned-issuer
+    kind: ClusterIssuer
+  commonName: keycloak.local
+  dnsNames:
+    - keycloak.local
+    - cert.solra.fisa

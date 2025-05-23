@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+spec:
+  destination:
+    namespace: solra-cert
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: keycloak
+    targetRevision: 21.3.1
+    helm:
+      values: |
+        auth:
+          adminUser: admin
+          adminPassword: admin
+        ingress:
+          enabled: true
+          hostname: cert.solra.fisa
+          ingressClassName: nginx
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            cert-manager.io/cluster-issuer: solra-selfsigned-issuer
+          tls: true
+          extraTls:
+            - hosts:
+                - cert.solra.fisa
+              secretName: solra-keycloak-tls
+        postgresql:
+          enabled: true
+          auth:
+            postgresPassword: postgres
+            username: bn_keycloak
+            password: keycloakpass
+            database: bitnami_keycloak
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
