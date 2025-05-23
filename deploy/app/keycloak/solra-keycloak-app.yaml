@@ -17,11 +17,7 @@ spec:
         auth:
           adminUser: admin
           adminPassword: admin
-
-        proxy:
-          enabled: true
-          addressForwarding: true
-
+          
         http:
           enabled: true
 
