@@ -692,7 +692,7 @@ controller:
 
   ingress:
     # -- Enables ingress
-    enabled: false
+    enabled: true
 
     # Override for the default paths that map requests to the backend
     # -- Override for the default Ingress paths
@@ -727,7 +727,7 @@ controller:
 
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
-    hostName:
+    hostName: jenkins.solra.fisa
     # -- Hostname to serve assets from
     resourceRootUrl:
     # -- Ingress TLS configuration
