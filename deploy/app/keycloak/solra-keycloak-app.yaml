@@ -17,6 +17,17 @@ spec:
         auth:
           adminUser: admin
           adminPassword: admin
+
+        proxy:
+          enabled: true
+          addressForwarding: true
+
+        http:
+          enabled: true
+
+        https:
+          enabled: false
+
         ingress:
           enabled: true
           hostname: cert.solra.fisa
@@ -29,6 +40,12 @@ spec:
             - hosts:
                 - cert.solra.fisa
               secretName: solra-keycloak-tls
+
+        service:
+          ports:
+            http: 80
+            https: ""
+        
         postgresql:
           enabled: true
           auth:
