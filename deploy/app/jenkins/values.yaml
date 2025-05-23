@@ -217,7 +217,7 @@ controller:
   # For minikube, set this to NodePort, elsewhere uses LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
   # -- k8s service type
-  serviceType: NodePort
+  serviceType: ClusterIP
 
   # -- k8s service clusterIP. Only used if serviceType is ClusterIP
   clusterIp:
@@ -226,7 +226,7 @@ controller:
   # -- k8s target port
   targetPort: 8080
   # -- k8s node port. Only used if serviceType is NodePort
-  nodePort: 30003
+  # nodePort: 30003
 
   # Use Local to preserve the client source IP and avoids a second hop for LoadBalancer and NodePort type services,
   # but risks potentially imbalanced traffic spreading.
@@ -714,7 +714,7 @@ controller:
     labels: {}
     # -- Ingress annotations
     annotations:
-      {}
+      nginx.ingress.kubernetes.io/rewrite-target: /
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
@@ -724,6 +724,8 @@ controller:
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # -- Ingress path
     path:
+      - /
+    pathType: prefix
 
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
