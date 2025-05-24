@@ -30,21 +30,31 @@ credentialsId:
 renderHelmLabels: true
 
 controller:
-  startupProbe: null
+  startupProbe:
+    httpGet:
+      path: /login
+      port: http
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 20  # Jenkins는 초기 부팅이 느림
 
   readinessProbe:
     httpGet:
-      path: /
+      path: /login
       port: http
     periodSeconds: 10
+    timeoutSeconds: 5
     failureThreshold: 6
+    initialDelaySeconds: 20
 
   livenessProbe:
     httpGet:
-      path: /
+      path: /login
       port: http
     periodSeconds: 10
+    timeoutSeconds: 5
     failureThreshold: 6
+    initialDelaySeconds: 30
 
   # -- Used for label app.kubernetes.io/component
   serviceType: ClusterIP
