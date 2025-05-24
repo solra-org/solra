@@ -30,6 +30,21 @@ credentialsId:
 renderHelmLabels: true
 
 controller:
+  startupProbe: null
+
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    periodSeconds: 10
+    failureThreshold: 6
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    periodSeconds: 10
+    failureThreshold: 6
 
   # -- Used for label app.kubernetes.io/component
   serviceType: ClusterIP
@@ -176,7 +191,7 @@ controller:
   # If you set this prefix and use ingress controller, then you might want to set the ingress path below
   # I.e., "/jenkins"
   # -- Root URI Jenkins will be served on
-  jenkinsUriPrefix: "/"
+  jenkinsUriPrefix: ""
   jenkinsUrl: "http://jenkins.solra.fisa"
 
   # -- Enable pod security context (must be `true` if podSecurityContextOverride, runAsUser or fsGroup are set)
