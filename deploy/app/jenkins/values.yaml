@@ -30,6 +30,27 @@ credentialsId:
 renderHelmLabels: true
 
 controller:
+  startupProbe:
+  httpGet:
+    path: /
+    port: http
+  failureThreshold: 30      # 기존보다 늘려서 Jenkins 부팅 시간 확보
+  periodSeconds: 10
+
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    periodSeconds: 10
+    failureThreshold: 6
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    periodSeconds: 10
+    failureThreshold: 6
+    
   # -- Used for label app.kubernetes.io/component
   serviceType: ClusterIP
   componentName: "jenkins-controller"
