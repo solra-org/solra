@@ -696,7 +696,6 @@ controller:
 
     # Override for the default paths that map requests to the backend
     # -- Override for the default Ingress paths
-    paths: []
     # - backend:
     #     serviceName: ssl-redirect
     #     servicePort: use-annotation
@@ -723,10 +722,9 @@ controller:
 
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # -- Ingress path
-    path:
-      - /
-    pathType: Prefix
-
+    paths:
+      - path: /
+        pathType: Prefix
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
     hostName: jenkins.solra.fisa
