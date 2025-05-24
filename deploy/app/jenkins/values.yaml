@@ -725,7 +725,7 @@ controller:
     # -- Ingress path
     path:
       - /
-    pathType: prefix
+    pathType: Prefix
 
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
