@@ -729,8 +729,7 @@ controller:
         backend:
           service:
             name: solra-jenkins-app
-            port:
-              number: 8080
+            port: http
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
     hostName: jenkins.solra.fisa
