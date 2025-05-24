@@ -34,9 +34,10 @@ controller:
     httpGet:
       path: /login
       port: http
+    initialDelaySeconds: 60
+    failureThreshold: 60  # Jenkins는 초기 부팅이 느림
     periodSeconds: 10
     timeoutSeconds: 5
-    failureThreshold: 20  # Jenkins는 초기 부팅이 느림
 
   readinessProbe:
     httpGet:
