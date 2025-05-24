@@ -279,7 +279,7 @@ controller:
       failureThreshold: 60
       httpGet:
         # -- Set the Pod's HTTP path for the startup probe
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/'
+        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
         # -- Set the Pod's HTTP port to use for the startup probe
         port: http
       # -- Set the time interval between two startup probes executions in seconds
