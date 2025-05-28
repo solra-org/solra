@@ -5,8 +5,14 @@ metadata:
   namespace: solra
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # ✅ HTTP 요청 시 HTTPS로 리디렉션
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # ✅ 일부 버전에서 명시 필요
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - solra.com
+      secretName: solra-tls-secret  # 👉 kubectl로 등록한 TLS Secret 이름
   rules:
     - host: solra.com
       http:
