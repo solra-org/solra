@@ -6,6 +6,10 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"  # ✅ HTTP 요청 시 HTTPS로 리디렉션
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # ✅ 일부 버전에서 명시 필요
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Access-Control-Allow-Origin: https://localhost:5173";
+      more_set_headers "Access-Control-Allow-Credentials: true";
 spec:
   ingressClassName: nginx
   tls:
