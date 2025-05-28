@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - solra.com
-      secretName: solra-tls-secret  # 👉 kubectl로 등록한 TLS Secret 이름
+        - service.solra.fisa
+      secretName: solra-tls-cert
   rules:
-    - host: solra.com
+    - host: service.solra.fisa
       http:
         paths:
           - path: /api(/|$)(.*)
