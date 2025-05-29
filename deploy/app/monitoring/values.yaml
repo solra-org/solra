@@ -25,6 +25,11 @@ prometheus:
             requests:
               storage: 10Gi
           storageClassName: local-path
+          
+    additionalScrapeConfigs:
+      - job_name: 'mysql-backup-monitor'
+        static_configs:
+          - targets: ['10.5.100.42:9100']
 
 
 prometheus-node-exporter:
