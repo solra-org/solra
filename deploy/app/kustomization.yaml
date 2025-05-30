@@ -12,3 +12,5 @@ resources:
   - jenkins/solra-jenkins-app.yaml
   - keycloak/solra-cert-manager-app.yaml
   - keycloak/solra-keycloak-app.yaml
+  - monitoring/loki/solra-loki-app.yaml
+  - monitoring/promtail/solra-promtial-app.yaml

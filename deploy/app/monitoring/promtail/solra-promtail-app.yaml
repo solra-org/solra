@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: promtail
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: promtail
+    targetRevision: 6.15.5
+    helm:
+      values: |
+        config:
+          clients:
+            - url: http://loki.solra-monitoring.svc.cluster.local:3100/loki/api/v1/push
+          snippets:
+            pipelineStages:
+              - cri: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: solra-monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
