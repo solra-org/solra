@@ -4,6 +4,16 @@ grafana:
     type: NodePort
     nodePort: 32000
 
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki.solra-monitoring.svc.cluster.local:3100
+      isDefault: true
+      jsonData:
+        maxLines: 1000
+
+
 prometheus:
   enabled: true
   service:
