@@ -44,6 +44,9 @@ spec:
             - ReadWriteOnce
           size: 10Gi
 
+        # 🚨 반드시 명시적으로 'deploymentMode'도 설정
+        deploymentMode: "StatefulSet"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-monitoring
