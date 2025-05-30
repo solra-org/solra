@@ -8,18 +8,44 @@ spec:
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: loki
-    targetRevision: 6.6.2   # 최신 버전 확인 가능
+    targetRevision: 5.45.0
     helm:
       values: |
         loki:
           auth_enabled: false
-        commonConfig:
-          replication_factor: 1
-        storage:
-          type: filesystem
+
+          storage:
+            type: filesystem
+
+          storage_config:
+            boltdb_shipper:
+              active_index_directory: /var/loki/index
+              cache_location: /var/loki/index_cache
+              shared_store: filesystem
+            filesystem:
+              directory: /var/loki/chunks
+
+          schema_config:
+            configs:
+              - from: 2024-01-01
+                store: boltdb-shipper
+                object_store: filesystem
+                schema: v11
+                index:
+                  prefix: index_
+                  period: 24h
+
+          persistence:
+            enabled: true
+            storageClassName: standard
+            accessModes:
+              - ReadWriteOnce
+            size: 10Gi
+
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-monitoring
+
   syncPolicy:
     automated:
       prune: true
