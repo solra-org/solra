@@ -37,12 +37,12 @@ spec:
                   prefix: index_
                   period: 24h
 
-          persistence:
-            enabled: true
-            storageClassName: standard
-            accessModes:
-              - ReadWriteOnce
-            size: 10Gi
+        persistence:
+          enabled: true
+          storageClassName: standard
+          accessModes:
+            - ReadWriteOnce
+          size: 10Gi
 
   destination:
     server: https://kubernetes.default.svc
