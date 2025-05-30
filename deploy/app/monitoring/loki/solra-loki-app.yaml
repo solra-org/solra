@@ -15,6 +15,12 @@ spec:
 
         gateway:
           enabled: false
+        backend:
+          enabled: false
+        read:
+          enabled: false
+        write:
+          enabled: false
 
         loki:
           auth_enabled: false
