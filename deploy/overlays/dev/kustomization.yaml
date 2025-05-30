@@ -9,4 +9,4 @@ resources:
 #   - patch.yaml
 
 commonAnnotations:
-  sync-tag: "f9ce0a98d1b5b99cb397af8c58b6200085c71de7"
+  sync-tag: "0a56a3e0bb3c9b8664b68a66efe97d39d424c9aa"
