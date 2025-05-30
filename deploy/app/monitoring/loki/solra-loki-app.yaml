@@ -8,17 +8,15 @@ spec:
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: loki
-    targetRevision: 5.41.3
+    targetRevision: 6.6.2   # 최신 버전 확인 가능
     helm:
       values: |
         loki:
-          isDefault: true
-          persistence:
-            enabled: true
-            size: 10Gi
-            storageClassName: standard
-          service:
-            type: ClusterIP
+          auth_enabled: false
+        commonConfig:
+          replication_factor: 1
+        storage:
+          type: filesystem
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-monitoring
