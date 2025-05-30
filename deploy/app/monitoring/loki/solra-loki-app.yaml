@@ -7,45 +7,13 @@ spec:
   project: default
   source:
     repoURL: https://grafana.github.io/helm-charts
-    chart: loki
-    targetRevision: 5.45.0
+    chart: loki-stack
+    targetRevision: 2.9.11
     helm:
       values: |
-        deploymentMode: "Monolithic"
-
-        gateway:
-          enabled: false
-        backend:
-          enabled: false
-        read:
-          enabled: false
-        write:
-          enabled: false
-
         loki:
+          enabled: true
           auth_enabled: false
-
-          storage:
-            type: filesystem
-
-          storage_config:
-            boltdb_shipper:
-              active_index_directory: /var/loki/index
-              cache_location: /var/loki/index_cache
-              shared_store: filesystem
-            filesystem:
-              directory: /var/loki/chunks
-
-          schema_config:
-            configs:
-              - from: 2024-01-01
-                store: boltdb-shipper
-                object_store: filesystem
-                schema: v11
-                index:
-                  prefix: index_
-                  period: 24h
-
           persistence:
             enabled: true
             storageClassName: local-path
@@ -53,10 +21,17 @@ spec:
               - ReadWriteOnce
             size: 10Gi
 
+        promtail:
+          enabled: false
+
+        grafana:
+          enabled: false
+
+        fluent-bit:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-monitoring
-
   syncPolicy:
     automated:
       prune: true
