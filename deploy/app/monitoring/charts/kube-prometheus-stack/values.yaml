@@ -1010,7 +1010,7 @@ grafana:
 
   sidecar:
     dashboards:
-      enabled: true
+      enabled: false
       label: grafana_dashboard
       labelValue: "1"
       # Allow discovery in all namespaces for dashboards
