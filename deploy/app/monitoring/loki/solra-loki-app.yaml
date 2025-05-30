@@ -11,6 +11,8 @@ spec:
     targetRevision: 5.45.0
     helm:
       values: |
+        mode: "monolithic"
+
         loki:
           auth_enabled: false
 
