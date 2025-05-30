@@ -8,9 +8,10 @@ spec:
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: loki
+    targetRevision: 5.45.0
     helm:
       values: |
-        mode: monolithic
+        deploymentMode: "Monolithic"
 
         loki:
           auth_enabled: false
@@ -36,15 +37,12 @@ spec:
                   prefix: index_
                   period: 24h
 
-        persistence:
-          enabled: true
-          storageClassName: local-path
-          accessModes:
-            - ReadWriteOnce
-          size: 10Gi
-
-        # 🚨 반드시 명시적으로 'deploymentMode'도 설정
-        deploymentMode: "StatefulSet"
+          persistence:
+            enabled: true
+            storageClassName: local-path
+            accessModes:
+              - ReadWriteOnce
+            size: 10Gi
 
   destination:
     server: https://kubernetes.default.svc
