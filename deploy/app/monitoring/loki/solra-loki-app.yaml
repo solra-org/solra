@@ -13,6 +13,9 @@ spec:
       values: |
         deploymentMode: "Monolithic"
 
+        gateway:
+          enabled: false
+
         loki:
           auth_enabled: false
 
