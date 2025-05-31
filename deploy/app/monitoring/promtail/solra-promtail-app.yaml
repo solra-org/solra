@@ -41,13 +41,13 @@ spec:
           - name: varlog
             hostPath:
               path: /var/log
-          - name: containers
+          - name: containers-extra
             hostPath:
               path: /var/log/containers
         extraVolumeMounts:
           - name: varlog
             mountPath: /var/log
-          - name: containers
+          - name: containers-extra
             mountPath: /var/log/containers
             readOnly: true
   destination:
