@@ -17,7 +17,7 @@ spec:
           snippets:
             pipelineStages:
               - cri: {}
-            scrapeConfigs:
+            scrapeConfigs: |
               - job_name: kubernetes-pods
                 kubernetes_sd_configs:
                   - role: pod
