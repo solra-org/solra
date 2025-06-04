@@ -327,3 +327,6 @@ crash.log
 solra-backend-secret.yaml
 solra-root.ca.crt
 solra-root.token.txt
+
+# obsidian
+.obsidian/

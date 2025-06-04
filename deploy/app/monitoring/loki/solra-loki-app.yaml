@@ -34,6 +34,7 @@ spec:
 
         fluent-bit:
           enabled: false
+          
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-monitoring
