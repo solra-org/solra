@@ -1,8 +1,8 @@
 config:
   dryRun: true
-  runHour: 15        # 오후 3시 (15시) → 스케줄 생성
-  startHour: 18      # 오후 6시부터
-  endHour: 19        # 오후 7시까지 실행 가능
+  runHour: 17                   # 지금 바로 실행 가능
+  startHour: 17                 # 실행 시작 시각 = 현재 시각
+  endHour: 18                   # 실행 종료 시각
   timeZone: "Asia/Seoul"
 
   whitelistedNamespaces:
@@ -20,8 +20,8 @@ config:
     - solra-kube-monkey
 
   debug:
-    enabled: false
-    schedule_immediate_kill: false
+    enabled: true
+    schedule_immediate_kill: true  # 즉시 실행!
 
   notifications:
     enabled: true
@@ -29,3 +29,8 @@ config:
     attacks: |
       slack = true
       email = false
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
