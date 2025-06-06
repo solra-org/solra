@@ -11,7 +11,7 @@ spec:
     path: deploy/app/kube-monkey/chart/kubemonkey
     helm:
       valueFiles:
-        - ../../../values.yaml
+        - ../../values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: solra-kube-monkey
