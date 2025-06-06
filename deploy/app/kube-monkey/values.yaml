@@ -33,6 +33,10 @@ config:
   labelSelector:
     enabled: false
 
+image:
+  repository: asobti/kube-monkey
+  tag: v1.0.1
+
 resources:
   limits:
     cpu: 100m
