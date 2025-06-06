@@ -1,8 +1,8 @@
 config:
   dryRun: true
-  runHour: 3                  # ✅ KST 16:00 (오후 4시)에 해당
-  startHour: 3
-  endHour: 4
+  runHour: 4
+  startHour: 4
+  endHour: 5
   timeZone: "Asia/Seoul"
 
   whitelistedNamespaces:
