@@ -1,8 +1,8 @@
 config:
   dryRun: true
-  runHour: 16                   # 지금 바로 실행 가능
-  startHour: 17                 # 실행 시작 시각 = 현재 시각
-  endHour: 18                   # 실행 종료 시각
+  runHour: 19
+  startHour: 20
+  endHour: 21
   timeZone: "Asia/Seoul"
 
   whitelistedNamespaces:
