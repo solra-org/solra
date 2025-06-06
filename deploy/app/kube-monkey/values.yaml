@@ -29,6 +29,9 @@ config:
     attacks: |
       slack = true
       email = false
+      
+  labelSelector:
+    enabled: false
 
 resources:
   limits:
