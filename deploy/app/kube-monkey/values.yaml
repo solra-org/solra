@@ -1,0 +1,25 @@
+config:
+  dryRun: true
+  runHour: 14                 # 오후 2시 (14시 기준), 2:55 이전에 Sync해야 함
+  startHour: 14
+  endHour: 15
+  timeZone: "Asia/Seoul"
+
+  whitelistedNamespaces:
+    - solra
+    - solra-jenkins
+    - solra-harbor
+
+  blacklistedNamespaces:
+    - kube-system
+    - argocd
+    - redis
+    - solra-gitlab
+    - solra-monitoring
+    - solra-cert
+    - solra-kube-monkey
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi

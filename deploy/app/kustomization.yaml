@@ -14,3 +14,4 @@ resources:
   - keycloak/solra-keycloak-app.yaml
   - monitoring/loki/solra-loki-app.yaml
   - monitoring/promtail/solra-promtail-app.yaml
+  - kube-monkey/solra-kube-monkey-app.yaml
