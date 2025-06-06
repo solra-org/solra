@@ -24,6 +24,8 @@ config:
     schedule_immediate_kill: false
 
   notifications:
-    enabled: false
+    enabled: true
     proxy: ""
-    attacks: {}
+    attacks: |
+      slack = true
+      email = false
