@@ -1,8 +1,8 @@
 config:
   dryRun: true
-  runHour: 6
-  startHour: 6
-  endHour: 7
+  runHour: 15        # 오후 3시 (15시) → 스케줄 생성
+  startHour: 18      # 오후 6시부터
+  endHour: 19        # 오후 7시까지 실행 가능
   timeZone: "Asia/Seoul"
 
   whitelistedNamespaces:
