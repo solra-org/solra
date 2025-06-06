@@ -35,7 +35,7 @@ config:
 
 image:
   repository: asobti/kube-monkey
-  tag: v1.0.1
+  tag: v0.3.0
 
 resources:
   limits:
