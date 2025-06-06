@@ -1,5 +1,5 @@
 config:
-  dryRun: true
+  dryRun: false
   runHour: 19
   startHour: 20
   endHour: 21
