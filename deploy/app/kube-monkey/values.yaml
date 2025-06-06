@@ -1,8 +1,8 @@
 config:
   dryRun: true
-  runHour: 15                 # 오후 2시 (14시 기준), 2:55 이전에 Sync해야 함
-  startHour: 15
-  endHour: 16
+  runHour: 3                  # ✅ KST 16:00 (오후 4시)에 해당
+  startHour: 3
+  endHour: 4
   timeZone: "Asia/Seoul"
 
   whitelistedNamespaces:
